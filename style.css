@@ -1,0 +1,26 @@
+body {
+  font-family: sans-serif;
+  background: #cfddee;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+canvas {
+  background: #8bb0d8;
+  image-rendering: pixelated;
+  border: 2px solid #4a6a8a;
+}
+
+.controls {
+  margin-top: 15px;
+}
+
+button {
+  margin: 0 5px;
+}
