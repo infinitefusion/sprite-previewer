@@ -103,6 +103,71 @@ function animate(timestamp) {
 
 requestAnimationFrame(animate);
 
+function exportGif(index) {
+  const img = images[index];
+  if (!img) return alert("No sprite loaded.");
+
+  const frameW = img.width / 4;
+  const frameH = img.height / 4;
+
+  const off = document.createElement("canvas");
+  off.width  = frameW * SCALE;
+  off.height = frameH * SCALE;
+
+  const offCtx = off.getContext("2d");
+  offCtx.imageSmoothingEnabled = false;
+
+  const frames = [];
+
+  for (let f = 0; f < 4; f++) {
+    // ✅ HARD CLEAR WITH BACKGROUND COLOR
+    offCtx.fillStyle = "#8bb0d8";
+    offCtx.fillRect(0, 0, off.width, off.height);
+
+    offCtx.drawImage(
+        img,
+        f * frameW,
+        direction * frameH,
+        frameW,
+        frameH,
+        0,
+        0,
+        off.width,
+        off.height
+    );
+
+    frames.push(off.toDataURL("image/png"));
+  }
+
+  gifshot.createGIF(
+      {
+        images: frames,
+        interval: 1 / fps,
+        gifWidth: off.width,
+        gifHeight: off.height,
+
+        // ✅ MATCH THE CANVAS CLEAR COLOR
+        background: "#8bb0d8",
+
+        // ✅ PREVENT GHOSTING / ARTIFACTS
+        dither: false,
+        sampleInterval: 1,
+        numWorkers: 2
+      },
+      result => {
+        if (!result.error) {
+          const a = document.createElement("a");
+          a.href = result.image;
+          a.download = "sprite.gif";
+          a.click();
+        }
+      }
+  );
+}
+
+
+
+
 // ================= CONTROLS =================
 document.getElementById("fps").addEventListener("input", e => {
   fps = +e.target.value;

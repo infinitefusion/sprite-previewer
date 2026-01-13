@@ -11,10 +11,22 @@
 <h3>Drag and drop your sprites to test them!</h3>
 
 <div class="container">
-  <canvas id="c0"></canvas>
-  <canvas id="c1"></canvas>
-  <canvas id="c2"></canvas>
+  <div class="sprite-column">
+    <canvas id="c0"></canvas>
+    <button onclick="exportGif(0)">Export</button>
+  </div>
+
+  <div class="sprite-column">
+    <canvas id="c1"></canvas>
+    <button onclick="exportGif(1)">Export</button>
+  </div>
+
+  <div class="sprite-column">
+    <canvas id="c2"></canvas>
+    <button onclick="exportGif(2)">Export</button>
+  </div>
 </div>
+
 
 <div class="controls">
   <label>
@@ -32,6 +44,8 @@
   <button data-dir="3">Up</button>
 </div>
 
+
+<script src="https://cdn.jsdelivr.net/npm/gifshot@0.3.2/build/gifshot.min.js"></script>
 <script src="sprite_previewer.js"></script>
 </body>
 </html>
